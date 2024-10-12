@@ -1,0 +1,15 @@
+{
+  "name": "93_website",
+  "version": "1.0.0",
+  "description": "WebFlow website - work on custom code",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",    
+    "start": "parcel app.js"
+  },
+  "author": "Oleksii Sofiychuk",
+  "license": "ISC",
+  "dependencies": {
+    "parcel": "^2.12.0"
+  }
+}
