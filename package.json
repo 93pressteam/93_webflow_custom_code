@@ -4,7 +4,7 @@
   "description": "WebFlow website - work on custom code",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",    
+    "build": "parcel build src/js/global.js --dist-dir deploy_script --no-source-maps",
     "start": "parcel app.js"
   },
   "author": "Oleksii Sofiychuk",

@@ -39,3 +39,4 @@ Desktop.ini
 
 # Ignore package-lock.json
 package-lock.json
+setup_project_structure.sh
