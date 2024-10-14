@@ -2,14 +2,26 @@
   "name": "93_website",
   "version": "1.0.0",
   "description": "WebFlow website - work on custom code",
-  "main": "app.js",
   "scripts": {
-    "build": "parcel build src/js/global.js --dist-dir deploy_script --no-source-maps",
-    "start": "parcel src/js/global.js"
+     "build": "NODE_ENV=production parcel build src/js/global.js --dist-dir output/production --no-source-maps",
+     "start": "NODE_ENV=development parcel src/js/global.js --dist-dir output/development"
   },
   "author": "Oleksii Sofiychuk",
   "license": "ISC",
   "dependencies": {
     "parcel": "^2.12.0"
+  },
+  "targets": {
+    "default": {
+      "distDir": "./output/production",
+      "optimize": true
+    }
+  },
+  "devDependencies": {
+    "parcel-namer-hashless": "^1.0.6"
+  },
+  "parcel-namer-hashless": {
+    "include": [".js$", ".css$"],
+    "mode": "production"
   }
 }

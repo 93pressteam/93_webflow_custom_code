@@ -2,6 +2,11 @@
 
  // Імпортуємо модуль для обробки форми, який знадобиться на всіх сторінках
 import { handleFormSubmission } from './modules/formHandler.js';
+import './pages/home.js'; // Імпортуємо специфічний скрипт
+// import './pages/vacancies.js'; // Імпортуємо специфічний скрипт
+// import './pages/support.js'; // Імпортуємо специфічний скрипт
+
+window.Webflow ||= [];
 
 
 window.Webflow ||= [];

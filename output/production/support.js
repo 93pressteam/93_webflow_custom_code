@@ -1,0 +1,1 @@
+(0,globalThis.parcelRequireaf5a.register)("kKThM",function(e,o){function r(){console.log("Support page scripts loaded")}Object.defineProperty(e.exports,"initSupportPage",{get:()=>r,set:void 0,enumerable:!0,configurable:!0})});
