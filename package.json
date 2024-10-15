@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "WebFlow website - work on custom code",
   "scripts": {
-     "build": "NODE_ENV=production parcel build src/js/global.js --dist-dir output/production --no-source-maps",
-     "start": "NODE_ENV=development parcel src/js/global.js --dist-dir output/development"
+     "build": "rm -rf output/production .parcel-cache && NODE_ENV=production parcel build src/js/app.js --dist-dir output/production --no-source-maps",
+     "start": "rm -rf output/development .parcel-cache && NODE_ENV=development parcel src/js/app.js --dist-dir output/development"
   },
   "author": "Oleksii Sofiychuk",
   "license": "ISC",

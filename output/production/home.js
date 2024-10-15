@@ -1,0 +1,1 @@
+(0,globalThis.parcelRequireaf5a.register)("iFRUi",function(e,o){function i(){console.log("Home page scripts loaded"),console.log("pord_test_v1")}Object.defineProperty(e.exports,"initHomePage",{get:()=>i,set:void 0,enumerable:!0,configurable:!0})});
