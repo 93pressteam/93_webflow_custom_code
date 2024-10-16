@@ -1,5 +1,6 @@
 export function initGlobalScript() {
     console.log("Global script scripts loaded");
+    console.log("42");
     
     // Додайте специфічну логіку для всього сайту 
 
