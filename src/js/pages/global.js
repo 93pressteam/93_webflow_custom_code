@@ -1,9 +1,7 @@
-"use strict";
-
-window.Webflow ||= [];
-window.Webflow.push(() => {
-
-    console.log(' test ');
+export function initGlobalScript() {
+    console.log("Global script scripts loaded");
+    
+    // Додайте специфічну логіку для всього сайту 
 
     function showVacancyModal(slugCase) {
         const vacancyItems = $('[data-collection="vacancy"] > .collection-item');
@@ -184,4 +182,5 @@ window.Webflow.push(() => {
         });
     });
 
-});
+
+}

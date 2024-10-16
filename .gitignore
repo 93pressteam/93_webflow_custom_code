@@ -16,9 +16,7 @@ yarn-error.log*
 .env.production.local
 
 # Build output
-dist/
-dist/app.js
-dist/app.js.map
+output/development/
 
 # Parcel cache
 .parcel-cache/
@@ -39,3 +37,4 @@ Desktop.ini
 
 # Ignore package-lock.json
 package-lock.json
+setup_project_structure.sh
