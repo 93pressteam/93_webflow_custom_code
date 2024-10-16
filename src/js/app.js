@@ -1,10 +1,5 @@
 "use strict";
 
- // Імпортуємо модуль для обробки форми, який знадобиться на всіх сторінках
-import { handleFormSubmission } from './modules/formHandler.js';
-// import './pages/home.js'; // Імпортуємо специфічний скрипт
-// import './pages/vacancies.js'; // Імпортуємо специфічний скрипт
-// import './pages/support.js'; // Імпортуємо специфічний скрипт
 import { initRouter } from './router.js';
 
 window.Webflow ||= [];
@@ -12,39 +7,6 @@ window.Webflow ||= [];
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
-    // Виводимо повідомлення про завантаження глобальних скриптів
-
-
-    // Використовуйте модуль для форми, якщо потрібна форма є на сторінці
-
-
-    // Умовне підключення специфічних скриптів для кожної сторінки
-    // if (window.location.pathname === '') {
-    //     import('./pages/home.js').then(module => module.initHomePage());
-    // } else if (window.location.pathname === '/vacancies') {
-    //     import('./pages/vacancies.js').then(module => module.initVacanciesPage());
-    // } else if (window.location.pathname === '/support') {
-    //     import('./pages/support.js').then(module => module.initSupportPage());
-    // }
-
-    // const isProduction = window.location.hostname !== 'localhost';
-
- 
-
-    // loadModule('pages/global.js').then(module => module.initGlobalScript());
-
-    // if (window.location.pathname === '') {
-    //     loadModule('pages/home.js').then(module => module.initHomePage());
-    // } else if (window.location.pathname === '/vacancies') {
-    //     loadModule('pages/vacancies.js').then(module => module.initVacanciesPage());
-    // } else if (window.location.pathname === '/support') {
-    //     loadModule('pages/support.js').then(module => module.initSupportPage());
-    // }
-
-    // const loadModule = (modulePath) => {
-    //     return import(modulePath);
-    // };
-
 
     if (process.env.NODE_ENV === 'production') {
 
@@ -55,8 +17,6 @@ window.Webflow.push(() => {
             initRouter();
         }
 
-        
-        
     } else {
         console.log("Running in development mode");
         // Логіка для розробки, наприклад:
@@ -71,6 +31,5 @@ window.Webflow.push(() => {
             import('./pages/support.js').then(module => module.initSupportPage());
         }
     }
-
 
 });

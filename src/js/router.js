@@ -3,8 +3,6 @@ import './pages/home.js';
 import './pages/vacancies.js'; 
 import './pages/support.js'; 
 
-console.log("test_42");
-
 export function initRouter() {
     import('./pages/global.js').then(module => module.initGlobalScript());
     import('./pages/home.js').then(module => module.initHomePage());
