@@ -1,1 +1,0 @@
-(0,globalThis.parcelRequireaf5a.register)("jMjr7",function(e,o){function a(){console.log("Vacancies page scripts loaded"),console.log("pord_test_v1")}Object.defineProperty(e.exports,"initVacanciesPage",{get:()=>a,set:void 0,enumerable:!0,configurable:!0})});

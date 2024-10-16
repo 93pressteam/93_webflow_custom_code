@@ -5,6 +5,7 @@ import { handleFormSubmission } from './modules/formHandler.js';
 // import './pages/home.js'; // Імпортуємо специфічний скрипт
 // import './pages/vacancies.js'; // Імпортуємо специфічний скрипт
 // import './pages/support.js'; // Імпортуємо специфічний скрипт
+import { initRouter } from './router.js';
 
 window.Webflow ||= [];
 
@@ -46,13 +47,14 @@ window.Webflow.push(() => {
 
 
     if (process.env.NODE_ENV === 'production') {
-        console.log("Running in production mode");
-        // Статичні імпорти всіх модулів для продакшену
 
-        import('./pages/global.js').then(module => module.initGlobalScript());
-        import('./pages/home.js').then(module => module.initHomePage());
-        import('./pages/vacancies.js').then(module => module.initVacanciesPage());
-        import('./pages/support.js').then(module => module.initSupportPage());
+        // // Статичні імпорти всіх модулів для продакшену
+        if (process.env.NODE_ENV === 'production') {
+            console.log("Running in production mode");
+
+            initRouter();
+        }
+
         
         
     } else {
