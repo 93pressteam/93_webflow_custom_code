@@ -12,7 +12,7 @@ window.Webflow.push(() => {
 
         // // Статичні імпорти всіх модулів для продакшену
         if (process.env.NODE_ENV === 'production') {
-            console.log("Running in production mode");
+            // console.log("Running in production mode");
 
             initRouter();
         }
