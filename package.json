@@ -4,7 +4,7 @@
   "description": "WebFlow website - work on custom code",
   "scripts": {
      "build": "rm -rf output/production .parcel-cache && NODE_ENV=production parcel build src/js/app.js --dist-dir output/production --no-source-maps",
-     "start": "rm -rf output/development .parcel-cache && NODE_ENV=development parcel src/js/app.js --dist-dir output/development"
+     "start": "rm -rf output/development .parcel-cache && NODE_ENV=development parcel src/js/app.js --dist-dir output/development --host 192.168.50.203 --https --cert ./server.crt --key ./server.key"
   },
   "author": "Oleksii Sofiychuk",
   "license": "ISC",
