@@ -42,7 +42,7 @@ export function styleForm() {
             if (selectedDate > minDate) {
                 hasError = true;
                 $displayInfo.text("Ви маєте бути старші 18 років.");
-                $displayInfo.removeClass('hide_placeholder').addClass('error-message');
+                $displayInfo.removeClass('disable_visibility').addClass('error-message');
                 $dateInput.val(''); // Очищення поля
             } else {
                 hasError = false;
@@ -60,8 +60,8 @@ export function styleForm() {
         // Функція відкриття date picker
         function openDatePicker($dateInput, $displayInfo) {
             if (isiOS) {
-                $displayInfo.addClass('hide_placeholder');
-                $dateInput.removeClass('hide_placeholder').focus();
+                $displayInfo.addClass('disable_visibility');
+                $dateInput.removeClass('disable_visibility').focus();
             } else {
                 $dateInput.focus();
                 try {
