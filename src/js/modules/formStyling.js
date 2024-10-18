@@ -1,40 +1,64 @@
 export function styleForm() {
-    
     $(document).ready(function () {
-        const $displayInfo = $('[data-mask]');
-        const $dateFieldWrapper = $('.form-field-wrapper.target');
-        const $dateInput = $('.form-input.mod--date.target');
         const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-        let hasError = false; // Додаткова змінна для перевірки помилки
-
+        let hasError = false;
+        
         const minDate = new Date();
-        minDate.setFullYear(minDate.getFullYear() - 18); // Задає мінімальну дату на 18 років назад
-        const minDateString = minDate.toISOString().split('T')[0]; // Форматує в формат YYYY-MM-DD
-
-        $dateInput.attr('max', minDateString);
-
-        // Функція для обробки зміни дати
-        function handleDateChange() {
-            const selectedDate = new Date($(this).val());
-
-            if (selectedDate > minDate) {
-                hasError = true; // Встановлюємо помилку
-                $displayInfo.text("Ви маєте бути старші 18 років."); // Показуємо повідомлення
-                $displayInfo.removeClass('hide_placeholder').addClass('error-message'); // Показуємо текст та додаємо клас
-
-                $(this).val(''); // Очищуємо поле, якщо обрана дата не відповідає обмеженню
-            } else {
-                hasError = false; // Скидаємо помилку
-                updateMaskText(); // Оновлюємо текст маски
-                //$dateInput.addClass('hide_placeholder'); 
-            }
-
+        minDate.setFullYear(minDate.getFullYear() - 18);
+        const minDateString = minDate.toISOString().split('T')[0];
+    
+        // Функція для ініціалізації поля дати
+        function initDateField($fieldWrapper, $dateInput, $displayInfo) {
+            // Встановлюємо мінімальну дату
+            $dateInput.attr('max', minDateString);
+    
+            // Обробка зміни дати
+            $dateInput.on('focusout', function () {
+                handleDateChange($dateInput, $displayInfo);
+            });
+    
+            // Оновлення маски
+            $dateInput.on('change focusout', function () {
+                updateMaskText($dateInput, $displayInfo);
+            });
+    
+            // Відкриття date picker
+            $displayInfo.on('click mousedown touchstart', function (event) {
+                event.preventDefault();
+                openDatePicker($dateInput, $displayInfo);
+            });
+    
+            // Оновлення тексту маски при кліку поза полем
+            $(document).on('click', function (event) {
+                if (!$fieldWrapper.is(event.target) && !$dateInput.val()) {
+                    $displayInfo.text('Дата народження*');
+                }
+            });
         }
-
-        $dateInput.on('focusout', handleDateChange); // Викликаємо функцію при зміні дати
-
-        // Функція для відкриття календаря
-        function openDatePicker() {
+    
+        // Функція обробки зміни дати
+        function handleDateChange($dateInput, $displayInfo) {
+            const selectedDate = new Date($dateInput.val());
+            if (selectedDate > minDate) {
+                hasError = true;
+                $displayInfo.text("Ви маєте бути старші 18 років.");
+                $displayInfo.removeClass('hide_placeholder').addClass('error-message');
+                $dateInput.val(''); // Очищення поля
+            } else {
+                hasError = false;
+                updateMaskText($dateInput, $displayInfo);
+            }
+        }
+    
+        // Функція оновлення тексту маски
+        function updateMaskText($dateInput, $displayInfo) {
+            if (!hasError) {
+                $displayInfo.text($dateInput.val() || 'Дата народження*');
+            }
+        }
+    
+        // Функція відкриття date picker
+        function openDatePicker($dateInput, $displayInfo) {
             if (isiOS) {
                 $displayInfo.addClass('hide_placeholder');
                 $dateInput.removeClass('hide_placeholder').focus();
@@ -49,33 +73,18 @@ export function styleForm() {
                 }
             }
         }
-
-        // Показати поле введення дати або відкрити календар під час кліку на маску
-        $displayInfo.on('click mousedown touchstart', function (event) {
-            event.preventDefault();
-            // Скидаємо повідомлення про помилку при спробі вибрати нову дату
-            //  if (hasError) {
-            //   $displayInfo.text('Дата народження*');
-            // }
-            openDatePicker();
-        });
-
-        // Оновлення тексту маски на основі значення поля дати
-        function updateMaskText() {
-            // Оновлюємо текст маски тільки якщо немає помилки
-            if (!hasError) {
-                $displayInfo.text($dateInput.val() || 'Дата народження*');
-            }
-        }
-
-        // Оновлення тексту маски при зміні значення або втраті фокусу
-        $dateInput.on('change focusout', updateMaskText);
-
-        // Відновити текст маски при кліку поза полем дати, якщо поле порожнє
-        $(document).on('click', function (event) {
-            if (!$dateFieldWrapper.is(event.target) && !$dateInput.val()) {
-                $displayInfo.text('Дата народження*');
-            }
-        });
+    
+        // Ініціалізація полів дати для обох випадків
+        initDateField(
+            $('[data-modal="false"] .form-field-wrapper.target'), 
+            $('[data-modal="false"] .form-input.mod--date.target'), 
+            $('[data-modal="false"] [data-mask]')
+        );
+        
+        initDateField(
+            $('[data-modal="true"] .form-field-wrapper.target'), 
+            $('[data-modal="true"] .form-input.mod--date.target'), 
+            $('[data-modal="true"] [data-mask]')
+        );
     });
 }
