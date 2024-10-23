@@ -1,20 +1,21 @@
 // Модуль для обробки форм
-export function handleFormSubmission(formId) {
-    // const form = document.getElementById(formId);
+export function formHandler() {
 
     //form script
+    // Отримуємо всі форми
+    const forms = document.querySelectorAll('.form-recruit'); // Замінив на клас, щоб можна було вибирати кілька форм
+    const btn_submits = document.querySelectorAll('.btn-submit-recruit');
 
-    const form = document.getElementById('email-form');
-    const btn_submit = document.getElementById('btn-submit');
+    // Базовий URL для запитів
+    const baseUrl = 'https://serverless.info-93ombr.workers.dev';
 
-    //set from action as "#" to prevent page refresh
-    form.action = '#';
-
+    // Функція для форматування дати
     function formatDate(dateString) {
         const parts = dateString.split('-');
         return `${parts[1]}/${parts[2]}/${parts[0]}`;
     }
 
+    // Функція для отримання даних з сервера
     async function fetchData(url) {
         const response = await fetch(url);
         if (!response.ok) {
@@ -23,49 +24,52 @@ export function handleFormSubmission(formId) {
         }
         return response.json();
     }
-    const baseUrl = 'https://serverless.info-93ombr.workers.dev';
 
+    // Функція для заповнення спеціальностей в кожній формі
     async function populateSpecialties() {
         try {
             const requestUrl = `${baseUrl}/vacancies`;
             const responseData = await fetchData(requestUrl);
 
-            const specialtySelector = document.querySelector(
-                'select[postion="true"]'
-            );
-            specialtySelector.innerHTML =
-                '<option value="">Спеціальність*</option>';
-            responseData.objects.forEach((item) => {
-                const option = document.createElement('option');
-                option.value = item.vacancyId;
-                option.textContent = item.position;
-                specialtySelector.appendChild(option);
+            // Оновлюємо спеціальності для кожної форми
+            forms.forEach((form) => {
+                const specialtySelector = form.querySelector('select[postion="true"]');
+                specialtySelector.innerHTML = '<option value="">Спеціальність*</option>';
+                responseData.objects.forEach((item) => {
+                    const option = document.createElement('option');
+                    option.value = item.vacancyId;
+                    option.textContent = item.position;
+                    specialtySelector.appendChild(option);
+                });
             });
         } catch (error) {
             console.error('Error populating specialties:', error);
         }
     }
 
+    // Функція для обробки відправки форми
     async function submitForm(event) {
         event.preventDefault();
         let errorMessages = [];
 
-        const vacancy = document.querySelector(
-            'select[postion="true"]'
-        ).selectedOptions[0];
+        // Отримуємо поточну форму
+        const form = event.target;
+
+        const vacancy = form.querySelector('select[postion="true"]').selectedOptions[0];
 
         const formData = {
-            fullName: document.querySelector('input[fullname="form"]').value.trim(),
+            fullName: form.querySelector('input[fullname="form"]').value.trim(),
             position: vacancy.text,
-            experience: document
+            experience: form
                 .querySelector('select[experience="form"]')
                 .value.trim(),
-            db: formatDate(document.querySelector('input[type="date"]').value),
-            phone: document.querySelector('input[phone="form"]').value.trim(),
-            descr: document.querySelector('textarea[desc="form"]').value.trim(),
+            db: formatDate(form.querySelector('input[type="date"]').value),
+            phone: form.querySelector('input[phone="form"]').value.trim(),
+            descr: form.querySelector('textarea[desc="form"]').value.trim(),
             vacancyId: vacancy.value,
         };
 
+        // Валідація форми
         if (!formData.fullName) {
             errorMessages.push("Будь ласка, введіть ім'я.");
         } else if (formData.fullName.split(' ').length < 2) {
@@ -77,8 +81,10 @@ export function handleFormSubmission(formId) {
         if (!formData.position) {
             errorMessages.push('Будь ласка, виберіть спеціальність.');
         }
+
         const errorMessage =
-            'Виникла помилка при відправці форми. Будь ласка, спробуйте раз';
+            'Виникла помилка при відправці форми. Будь ласка, спробуйте ще раз';
+
         try {
             if (errorMessages.length > 0) {
                 alert(errorMessages.join('\n'));
@@ -107,21 +113,13 @@ export function handleFormSubmission(formId) {
         }
     }
 
+    // Викликаємо функцію заповнення спеціальностей
     populateSpecialties();
-    form.addEventListener('submit', submitForm);
 
+    // Додаємо обробник подій для кожної форми
+    forms.forEach((form) => {
+        
+        form.addEventListener('submit', submitForm);
+    });
 
-
-
-    if (form) {
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const formData = new FormData(form);
-            // Додайте логіку обробки даних форми
-
-            console.log('Form submitted:', formData);
-        });
-    } else {
-        console.warn(`Form with ID ${formId} not found`);
-    }
 }

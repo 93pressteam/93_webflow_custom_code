@@ -1,10 +1,13 @@
 import { styleForm } from '../modules/formStyling';
+import { formHandler } from '../modules/formHandler';
 
 export function initGlobalScript() {
     console.log("Global script scripts loaded");
 
     // Додати візуальні ефекти до форми
     styleForm();
+    // імплементувати логіку для handle multiple forms on page 
+    formHandler();
     
     // Додайте специфічну логіку для всього сайту 
 
