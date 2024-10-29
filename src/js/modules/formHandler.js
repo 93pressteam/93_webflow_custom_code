@@ -30,6 +30,7 @@ export function formHandler() {
         try {
             const requestUrl = `${baseUrl}/vacancies`;
             const responseData = await fetchData(requestUrl);
+            console.log(forms);
 
             // Оновлюємо спеціальності для кожної форми
             forms.forEach((form) => {
@@ -40,6 +41,8 @@ export function formHandler() {
                     option.value = item.vacancyId;
                     option.textContent = item.position;
                     specialtySelector.appendChild(option);
+                    console.log(option.textContent);
+                    
                 });
             });
         } catch (error) {
