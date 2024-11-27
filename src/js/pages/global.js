@@ -11,32 +11,6 @@ export function initGlobalScript() {
     
     // Додайте специфічну логіку для всього сайту 
 
-    function showVacancyModal(slugCase) {
-        const vacancyItems = $('[data-collection="vacancy"] > .collection-item');
-        const inst = $('[data-remodal-id=vacancy]').remodal();
-
-        const foundItem = vacancyItems.filter(function () {
-            return $(this).data('vacancy-link') === slugCase;
-        });
-
-        if (foundItem.length) {
-            vacancyItems.hide();
-            foundItem.show();
-            inst.open();
-        } else {
-            console.error('No vacancy item found for slug:', slugCase);
-            event.preventDefault();
-        }
-    }
-
-    $('[data-collection="vacancy-list"] .collection-item > a').on('click', function (event) {
-        event.preventDefault();
-        const slugCase = $(this).attr('href').replace('/vacancies/', '');
-        console.log('Slug Case:', slugCase);
-        showVacancyModal(slugCase);
-        return false;
-    });
-
     // Swiper
     var swiper__company = new Swiper('[data-swiper=company]', {
         speed: 500,

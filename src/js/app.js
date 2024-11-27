@@ -19,15 +19,24 @@ window.Webflow.push(() => {
 
     } else {
         console.log("Running in development mode");
-        // Логіка для розробки, наприклад:
- 
-        import('./pages/global.js').then(module => module.initGlobalScript());
 
-        if (window.location.pathname === '/') {
+        // Функція для видалення мовного префікса з URL
+        function removeLanguagePrefix(pathname) {
+            return pathname.replace(/^\/[a-z]{2}(\/|$)/, '/'); // Видаляє "/en" або "/ua" на початку
+        }
+        
+        // Отримуємо шлях без мовного префікса
+        const normalizedPath = removeLanguagePrefix(window.location.pathname);
+        
+        // Глобальний скрипт
+        import('./pages/global.js').then(module => module.initGlobalScript());
+        
+        // Маршрутизація
+        if (normalizedPath === '/') {
             import('./pages/home.js').then(module => module.initHomePage());
-        } else if (window.location.pathname === '/vacancies') {
+        } else if (normalizedPath === '/vacancies') {
             import('./pages/vacancies.js').then(module => module.initVacanciesPage());
-        } else if (window.location.pathname === '/support') {
+        } else if (normalizedPath === '/support') {
             import('./pages/support.js').then(module => module.initSupportPage());
         }
     }

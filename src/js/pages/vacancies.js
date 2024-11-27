@@ -22,11 +22,15 @@ function showVacancyModal(slugCase) {
   
   $('[data-collection="vacancy-list"] .collection-item > a').on('click', function(event) {
     event.preventDefault();
-    const slugCase = $(this).attr('href').replace('/vacancies/', '');
+    const href = $(this).attr('href');
+    
+    // Регулярний вираз для видалення локалі (/en/ або інших мов)
+    const slugCase = href.replace(/^\/[a-z]{2}(\/|$)/, '/').replace('/vacancies/', '');
+
     console.log('Slug Case:', slugCase);
     showVacancyModal(slugCase);
     return false;
-  });
+    });
   
   
   if (window.innerWidth <= 776){
