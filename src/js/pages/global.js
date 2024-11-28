@@ -1,5 +1,6 @@
 import { styleForm } from '../modules/formStyling';
 import { formHandler } from '../modules/formHandler';
+import { initSwiper } from '../modules/swiperManager';
 
 export function initGlobalScript() {
     console.log("Global script scripts loaded");
@@ -12,15 +13,8 @@ export function initGlobalScript() {
     // Додайте специфічну логіку для всього сайту 
 
     // Swiper
-    var swiper__company = new Swiper('[data-swiper=company]', {
-        speed: 500,
-        spaceBetween: 0,
-        slidesPerView: 1,
-        navigation: {
-            nextEl: '[data-swiper=next-company]',
-            prevEl: '[data-swiper=prev-company]',
-        },
-    });
+    // ініціалізація слайдера для COMPANY 
+    var swiper__company = initSwiper('[data-swiper=company]', 'company');
 
     if (window.innerWidth >= 776) {
         var swiper__line = new Swiper('[data-swiper=line]', {

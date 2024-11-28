@@ -1,3 +1,5 @@
+import { initSwiper } from '../modules/swiperManager';
+
 export function initVacanciesPage() {
     console.log("Vacancies page scripts loaded");
     
@@ -31,17 +33,12 @@ $('[data-collection="vacancy-list"] .collection-item > a').on('click', function(
   return false;
   });
   
-  
+// Swiper
   if (window.innerWidth <= 776){
-      var swiper__company = new Swiper('[data-swiper=company]', {
-          speed: 500,
-          spaceBetween: 0,
-          slidesPerView: 1,
-          navigation: {
-              nextEl: '[data-swiper=next-company]',
-              prevEl: '[data-swiper=prev-company]',
-          },
-      });
+
+    // ініціалізація слайдера для COMPANY 
+    var swiper__company = initSwiper('[data-swiper=company]', 'company');
+
            let swiper__values = new Swiper('[data-swiper=values]', {
           speed: 500,
           spaceBetween: 16,
