@@ -8,9 +8,6 @@ import { swiperConfigs } from '../modules/swiperConfigs';
 export function initAllowedSwiper(swiperName) {
     const pathname = window.location.pathname;
     const config = swiperConfigs[swiperName];
-    console.log(swiperName);
-    console.log(pathname);
-    console.log(config);
 
     if (!config) {
         console.error(`Конфігурація для Swiper '${swiperName}' не знайдена.`);
@@ -25,9 +22,8 @@ export function initAllowedSwiper(swiperName) {
 
     // Шукаємо елемент і ініціалізуємо Swiper
     const swiperElement = document.querySelector(`[data-swiper=${swiperName}]`);
-    console.log(swiperElement);
     if (!swiperElement) {
-        console.warn(`Елемент для Swiper '${swiperName}' не знайдено.`);
+        console.log(`Елемент для Swiper '${swiperName}' не знайдено.`);
         return null;
     }
 

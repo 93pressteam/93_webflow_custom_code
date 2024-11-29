@@ -37,23 +37,26 @@ $('[data-collection="vacancy-list"] .collection-item > a').on('click', function(
   if (window.innerWidth <= 776){
 
     // ініціалізація слайдера для COMPANY 
-    console.time('Init Swiper company');
-    var swiper__company = initAllowedSwiper('company');
-    console.timeEnd('Init Swiper company')
+    setTimeout(() => {
+        console.time('Init Swiper company');
+        console.log('vaqcancies');
+        initAllowedSwiper('company');
+        console.timeEnd('Init Swiper company');
+    }, 100); // Відкладення на 100 мс
 
-           let swiper__values = new Swiper('[data-swiper=values]', {
-          speed: 500,
-          spaceBetween: 16,
-          slidesPerView: 'auto',
-          navigation: {
-              nextEl: '[data-swiper=next-values]',
-              prevEl: '[data-swiper=prev-values]',
-          },
-          pagination: {
-              el: "[data-swiper=progress-values]",
-              type: "progressbar",
-          },
-      });
+     let swiper__values = new Swiper('[data-swiper=values]', {
+        speed: 500,
+        spaceBetween: 16,
+        slidesPerView: 'auto',
+        navigation: {
+            nextEl: '[data-swiper=next-values]',
+            prevEl: '[data-swiper=prev-values]',
+        },
+        pagination: {
+            el: "[data-swiper=progress-values]",
+            type: "progressbar",
+        },
+    });
   }
       let swiper__comadors = new Swiper('[data-swiper=comadors]', {
           speed: 500,

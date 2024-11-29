@@ -15,14 +15,18 @@ export function initGlobalScript() {
 
     // Swiper
     // ініціалізація слайдера для COMPANY 
-    console.time('Init Swiper company');
-    var swiper__company = initAllowedSwiper('company');
-    console.timeEnd('Init Swiper company')
+    setTimeout(() => {
+        console.time('Init Swiper company');
+        console.log('global');
+        initAllowedSwiper('company');
+        console.timeEnd('Init Swiper company');
+    }, 100); // Відкладення на 100 мс
 
     // ініціалізація слайдера для VIDEO 
-    console.time('Init Swiper video');
-    var swiper__company = initAllowedSwiper('video');
-    console.timeEnd('Init Swiper video')
+    // console.time('Init Swiper video');
+    // var swiper__company = initAllowedSwiper('video');
+    // console.timeEnd('Init Swiper video')
+    
 
 
 

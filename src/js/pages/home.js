@@ -30,13 +30,21 @@ export function initHomePage() {
       
       // Регулярний вираз для видалення локалі (/en/ або інших мов)
       const slugCase = href.replace(/^\/[a-z]{2}(\/|$)/, '/').replace('/vacancies/', '');
-      console.log('Slug Case:', slugCase);
+    //   console.log('Slug Case:', slugCase);
       showVacancyModal(slugCase);
       return false;
       });
+
+
     // Swiper
-    console.time('Init Swiper company');
-    var swiper__company = initAllowedSwiper('company');
-    console.timeEnd('Init Swiper company')
+    // console.time('Init Swiper company');
+    // var swiper__company = initAllowedSwiper('company');
+    // console.timeEnd('Init Swiper company')
+    setTimeout(() => {
+        console.time('Init Swiper company');
+        console.log('home');
+        initAllowedSwiper('company');
+        console.timeEnd('Init Swiper company');
+    }, 100); // Відкладення на 100 мс
 
     }
