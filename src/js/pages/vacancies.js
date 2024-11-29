@@ -1,6 +1,16 @@
 import { initAllowedSwiper } from '../modules/swiperManager';
 
 export function initVacanciesPage() {
+    console.time('VACANCIES page load time');
+
+   // Перевіряємо, чи це сторінка "Vacancies"
+   const path = window.location.pathname;
+   const pageIndicator = '/vacancies';
+   if (path !== pageIndicator) {
+       console.log("Це не сторінка Vacancies. Логіка не завантажується.");
+       return;
+   }
+
     console.log("Vacancies page scripts loaded");
     
  // керує модальним вікном з інтерактивним вибором професії
@@ -98,8 +108,10 @@ $('[data-collection="vacancy-list"] .collection-item > a').on('click', function(
           collectionList.find(".collection-item").show();
           loadMoreBtn.hide();
       }
+
+      
   });
   
-      
+  console.timeEnd('VACANCIES');
 }
  
