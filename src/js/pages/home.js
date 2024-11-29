@@ -1,3 +1,5 @@
+import { initAllowedSwiper } from '../modules/swiperManager';
+
 export function initHomePage() {
     console.log("Home page scripts loaded");
     
@@ -32,5 +34,9 @@ export function initHomePage() {
       showVacancyModal(slugCase);
       return false;
       });
+    // Swiper
+    console.time('Init Swiper company');
+    var swiper__company = initAllowedSwiper('company');
+    console.timeEnd('Init Swiper company')
 
     }

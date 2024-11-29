@@ -1,25 +1,35 @@
 import { swiperConfigs } from '../modules/swiperConfigs';
 
 /**
- * Ініціалізація Swiper
- * @param {string} selector - CSS-селектор для Swiper-контейнера.
- * @param {object} options - Об'єкт конфігурації для Swiper.
- * @returns {Swiper|null} - Повертає екземпляр Swiper або null, якщо елемент не знайдено.
+ * Ініціалізація Swiper за його ім'ям
+ * @param {string} swiperName - Ім'я слайдера (ключ з swiperConfigs).
+ * @returns {Swiper|null} - Повертає екземпляр Swiper або null, якщо елемент не знайдено або конфігурація відсутня.
  */
-export function initSwiper(selector, type) {
-    const swiperElement = document.querySelector(selector);
-    const config = swiperConfigs[type];
-    
-    if (!swiperElement) {
-        console.log(`Swiper '${selector}' не знайдено.`);
+export function initAllowedSwiper(swiperName) {
+    const pathname = window.location.pathname;
+    const config = swiperConfigs[swiperName];
+    console.log(swiperName);
+    console.log(pathname);
+    console.log(config);
+
+    if (!config) {
+        console.error(`Конфігурація для Swiper '${swiperName}' не знайдена.`);
         return null;
     }
 
-    if (!config) {
-        console.error(`Конфігурація для Swiper типу '${type}' не знайдена.`);
+    // Перевіряємо, чи дозволена ініціалізація на цій сторінці
+    if (!config.pages.includes(pathname)) {
+        console.log(`Swiper '${swiperName}' не дозволено для сторінки '${pathname}'.`);
         return null;
     }
-    
-    // Використовуємо глобальну змінну Swiper
-    return new Swiper(swiperElement, config);
+
+    // Шукаємо елемент і ініціалізуємо Swiper
+    const swiperElement = document.querySelector(`[data-swiper=${swiperName}]`);
+    console.log(swiperElement);
+    if (!swiperElement) {
+        console.warn(`Елемент для Swiper '${swiperName}' не знайдено.`);
+        return null;
+    }
+
+    return new Swiper(swiperElement, config.settings);
 }
