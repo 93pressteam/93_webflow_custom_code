@@ -1,8 +1,7 @@
 import { initAllowedSwiper } from '../modules/swiperManager';
 
 export function initVacanciesPage() {
-    console.time('VACANCIES page load time');
-
+    
    // Перевіряємо, чи це сторінка "Vacancies"
    const path = window.location.pathname;
    const pageIndicator = '/vacancies';
@@ -11,9 +10,8 @@ export function initVacanciesPage() {
        return;
    }
 
-    console.log("Vacancies page scripts loaded");
-    
- // керує модальним вікном з інтерактивним вибором професії
+
+// керує модальним вікном з інтерактивним вибором професії
 function showVacancyModal(slugCase) {
     const vacancyItems = $('[data-collection="vacancy"] > .collection-item');
     const inst = $('[data-remodal-id=vacancy]').remodal();
@@ -47,12 +45,8 @@ $('[data-collection="vacancy-list"] .collection-item > a').on('click', function(
   if (window.innerWidth <= 776){
 
     // ініціалізація слайдера для COMPANY 
-    setTimeout(() => {
-        console.time('Init Swiper company');
-        console.log('vaqcancies');
-        initAllowedSwiper('company');
-        console.timeEnd('Init Swiper company');
-    }, 100); // Відкладення на 100 мс
+    initAllowedSwiper('company');
+
 
      let swiper__values = new Swiper('[data-swiper=values]', {
         speed: 500,
@@ -112,6 +106,5 @@ $('[data-collection="vacancy-list"] .collection-item > a').on('click', function(
       
   });
   
-  console.timeEnd('VACANCIES');
 }
  

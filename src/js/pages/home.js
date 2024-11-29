@@ -46,14 +46,7 @@ if (path !== pageIndicator) {
 
 
     // Swiper
-    // console.time('Init Swiper company');
-    // var swiper__company = initAllowedSwiper('company');
-    // console.timeEnd('Init Swiper company')
-    setTimeout(() => {
-        console.time('Init Swiper company');
-        console.log('home');
-        initAllowedSwiper('company');
-        console.timeEnd('Init Swiper company');
-    }, 100); // Відкладення на 100 мс
+    var swiper__company =initAllowedSwiper('company');
+    var swiper__video = initAllowedSwiper('video');
 
     }

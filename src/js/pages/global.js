@@ -4,7 +4,7 @@ import { initAllowedSwiper } from '../modules/swiperManager';
 
 
 export function initGlobalScript() {
-    console.time('GLOBAL script load time');
+
     console.log("Global script scripts loaded");
 
     // Додати візуальні ефекти до форми
@@ -14,20 +14,6 @@ export function initGlobalScript() {
     
     // Додайте специфічну логіку для всього сайту 
 
-    // Swiper
-    // ініціалізація слайдера для COMPANY 
-    setTimeout(() => {
-        console.time('Init Swiper 111company');
-        console.log('global');
-        initAllowedSwiper('company');
-        console.timeEnd('Init Swiper 111company');
-    }, 1000); // Відкладення на 100 мс
-
-    // ініціалізація слайдера для VIDEO 
-    // console.time('Init Swiper video');
-    // var swiper__company = initAllowedSwiper('video');
-    // console.timeEnd('Init Swiper video')
-    
     if (window.innerWidth >= 776) {
         var swiper__line = new Swiper('[data-swiper=line]', {
             speed: 500,
@@ -76,5 +62,4 @@ export function initGlobalScript() {
             swiperArr.push(swiper);
         });
     }
-    console.timeEnd('GLOBAL');
 }
