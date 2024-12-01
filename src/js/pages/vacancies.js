@@ -18,35 +18,11 @@ export function initVacanciesPage() {
   // Swiper
   if (window.innerWidth <= 776) {
     // ініціалізація слайдера для COMPANY
-    initAllowedSwiper("company");
+    let swiper__company = initAllowedSwiper("company");
 
-    let swiper__values = new Swiper("[data-swiper=values]", {
-      speed: 500,
-      spaceBetween: 16,
-      slidesPerView: "auto",
-      navigation: {
-        nextEl: "[data-swiper=next-values]",
-        prevEl: "[data-swiper=prev-values]",
-      },
-      pagination: {
-        el: "[data-swiper=progress-values]",
-        type: "progressbar",
-      },
-    });
+    let swiper__values = initAllowedSwiper("values");
   }
-  let swiper__comadors = new Swiper("[data-swiper=comadors]", {
-    speed: 500,
-    spaceBetween: 16,
-    slidesPerView: "auto",
-    navigation: {
-      nextEl: "[data-swiper=next-comadors]",
-      prevEl: "[data-swiper=prev-comadors]",
-    },
-    pagination: {
-      el: "[data-swiper=progress-comadors]",
-      type: "progressbar",
-    },
-  });
+  let swiper__comadors = initAllowedSwiper("comadors");
 
   $(document).ready(function () {
     const collectionList = $("#collection");

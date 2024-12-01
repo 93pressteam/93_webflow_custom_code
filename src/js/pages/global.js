@@ -11,52 +11,49 @@ export function initGlobalScript() {
 
   // Додайте специфічну логіку для всього сайту
 
-  if (window.innerWidth >= 776) {
-    var swiper__line = new Swiper("[data-swiper=line]", {
-      speed: 500,
-      slidesPerView: 7,
-      watchSlidesProgress: true,
-      allowTouchMove: true,
-    });
+  // if (window.innerWidth >= 776) {
 
-    const swiperArr = [];
-    $("[data-swiper=road]").each((index, el) => {
-      const swiperOptions = {
-        speed: 500,
-        direction: "vertical",
-        slidesPerView: 1,
-        on: {
-          slideChange: function () {
-            var activeSlide = $(".swiper-slide-thumb-active");
-            var roadBorder = $(".swiper-road-progress");
-            var roadPin = $(".icon-medium.mod--swiper-line");
-            activeSlide.append(roadBorder);
-            activeSlide.append(roadPin);
-          },
-        },
-      };
+  // // Ініціалізація Swiper для timeline бойового шляху
+  // var swiper__line = initAllowedSwiper("line");
 
-      // Додаємо navigation та thumbs тільки для першого елемента в масиві
-      if (index === 0) {
-        swiperOptions.navigation = {
-          nextEl: "[data-swiper=next-road]",
-          prevEl: "[data-swiper=prev-road]",
-        };
-        swiperOptions.thumbs = {
-          swiper: swiper__line,
-        };
+  //   const swiperArr = [];
+  //   $("[data-swiper=road]").each((index, el) => {
+  //     const swiperOptions = {
+  //       speed: 500,
+  //       direction: "vertical",
+  //       slidesPerView: 1,
+  //       on: {
+  //         slideChange: function () {
+  //           var activeSlide = $(".swiper-slide-thumb-active");
+  //           var roadBorder = $(".swiper-road-progress");
+  //           var roadPin = $(".icon-medium.mod--swiper-line");
+  //           activeSlide.append(roadBorder);
+  //           activeSlide.append(roadPin);
+  //         },
+  //       },
+  //     };
 
-        // Додаємо обробник події slideChange для першого swiper
-        swiperOptions.on.slideChange = function () {
-          let indexActiveSlide = this.activeIndex;
-          swiperArr.slice(1).forEach((swiper) => {
-            swiper.slideTo(indexActiveSlide, 500);
-          });
-        };
-      }
+  //     // Додаємо navigation та thumbs тільки для першого елемента в масиві
+  //     if (index === 0) {
+  //       swiperOptions.navigation = {
+  //         nextEl: "[data-swiper=next-road]",
+  //         prevEl: "[data-swiper=prev-road]",
+  //       };
+  //       swiperOptions.thumbs = {
+  //         swiper: swiper__line,
+  //       };
 
-      const swiper = new Swiper(el, swiperOptions);
-      swiperArr.push(swiper);
-    });
-  }
+  //       // Додаємо обробник події slideChange для першого swiper
+  //       swiperOptions.on.slideChange = function () {
+  //         let indexActiveSlide = this.activeIndex;
+  //         swiperArr.slice(1).forEach((swiper) => {
+  //           swiper.slideTo(indexActiveSlide, 500);
+  //         });
+  //       };
+  //     }
+
+  //     const swiper = new Swiper(el, swiperOptions);
+  //     swiperArr.push(swiper);
+  //   });
+  // }
 }
