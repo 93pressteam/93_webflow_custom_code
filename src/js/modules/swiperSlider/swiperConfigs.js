@@ -8,6 +8,10 @@ export const swiperConfigs = {
         nextEl: "[data-swiper=next-company]",
         prevEl: "[data-swiper=prev-company]",
       },
+      lazy: {
+        loadPrevNext: true, // Завантажує сусідні слайди
+        loadPrevNextAmount: 2, // Кількість сусідніх слайдів для завантаження
+      },
     },
     pages: ["/", "/vacancies"], // Сторінки, де дозволена ініціалізація
   },
@@ -15,7 +19,8 @@ export const swiperConfigs = {
     settings: {
       speed: 500,
       spaceBetween: 16,
-      slidesPerView: "auto",
+      slidesPerView: 3,
+      loop: false, // Увімкніть нескінченний скролінг
       navigation: {
         nextEl: "[data-swiper=next-video]",
         prevEl: "[data-swiper=prev-video]",
@@ -24,6 +29,11 @@ export const swiperConfigs = {
         el: "[data-swiper=progress]",
         type: "progressbar",
       },
+      lazy: {
+        loadPrevNext: true, // Завантажує сусідні слайди
+        loadPrevNextAmount: 2, // Кількість сусідніх слайдів для завантаження
+      },
+      
     },
     pages: ["/"], // Сторінки, де дозволена ініціалізація
   },

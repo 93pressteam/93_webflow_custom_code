@@ -18,8 +18,59 @@ export function initHomePage() {
   initRemodalVacancies();
 
   // Swiper
-  var swiper__company = initAllowedSwiper("company");
-  var swiper__video = initAllowedSwiper("video");
+  
+ initAllowedSwiper("company");
+//  initAllowedSwiper('video');
+// const updateAriaLabels = (swiper) => {
+//   const visibleSlides = swiper.slides.filter(slide => !slide.classList.contains('swiper-slide-hidden'));
+//   const totalVisibleSlides = visibleSlides.length;
+
+//   visibleSlides.forEach((slide, index) => {
+//     const currentIndex = index + 1; // Починається з 1
+//     slide.setAttribute('aria-label', `${currentIndex} / ${totalVisibleSlides}`);
+//   });
+// };
+// console.log(document.readyState);
+
+// if (document.readyState === "loading") {
+//   document.addEventListener("DOMContentLoaded", () => {
+//     console.log("DOMContentLoaded викликано");
+//     initAllowedSwiper('video');
+//   });
+// } else {
+//   console.log("DOMContentLoaded вже стався");
+//   initAllowedSwiper('video');
+// }
+
+// document.addEventListener('DOMContentLoaded', () => {
+// const swiper = new Swiper('[data-swiper=video]', {
+//   lazy: {
+//     enabled: true,
+//     loadPrevNext: true,
+//   },
+//   speed: 500,
+//   spaceBetween: 16,
+//   slidesPerView: "auto",
+//   navigation: {
+//     nextEl: '[data-swiper=next-video]',
+//     prevEl: '[data-swiper=prev-video]',
+//   },
+//   pagination: {
+//     el: '[data-swiper=progress]',
+//     type: 'progressbar',
+//   },
+//   on: {
+//     init: (swiper) => {
+//       updateAriaLabels(swiper);
+//       console.log('Swiper ініціалізовано');
+//     },
+//     slideChange: (swiper) => {
+//       updateAriaLabels(swiper);
+//       console.log('Слайди оновлені');
+//     },
+//   },
+// });
+// });
 
   if (window.innerWidth >= 776) {
     // Ініціалізація Swiper для timeline бойового шляху
@@ -31,6 +82,9 @@ export function initHomePage() {
         speed: 500,
         direction: "vertical",
         slidesPerView: 1,
+        lazy: {
+          loadPrevNext: true, // Завантажує сусідні слайди
+        },
         on: {
           slideChange: function () {
             var activeSlide = $(".swiper-slide-thumb-active");
