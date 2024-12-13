@@ -6,7 +6,7 @@ import { swiperConfigs } from "./swiperConfigs";
  * @returns {Swiper|null} - Повертає екземпляр Swiper або null, якщо елемент не знайдено або конфігурація відсутня.
  */
 export function initAllowedSwiper(swiperName) {
-  const pathname = window.location.pathname;
+  const pathname = window.location.pathname.replace(/^\/[a-z]{2}(\/|$)/, "/");
   const config = swiperConfigs[swiperName];
 
   if (!config) {

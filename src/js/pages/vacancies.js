@@ -3,7 +3,7 @@ import { initRemodalVacancies } from "../modules/remodalVacancies/remodalVacanci
 
 export function initVacanciesPage() {
   // Перевіряємо, чи це сторінка "Vacancies"
-  const path = window.location.pathname;
+  const path = window.location.pathname.replace(/^\/[a-z]{2}(\/|$)/, "/");
   const pageIndicator = "/vacancies";
   if (path !== pageIndicator) {
     console.log("Це не сторінка Vacancies. Логіка не завантажується.");
