@@ -17,10 +17,14 @@ export const swiperConfigs = {
   },
   video: {
     settings: {
+      lazy: {
+        enabled: true,
+        loadPrevNext: true,
+        loadPrevNextAmount: 5,
+      },
       speed: 500,
       spaceBetween: 16,
-      slidesPerView: 3,
-      loop: false, // Увімкніть нескінченний скролінг
+      slidesPerView: "auto",
       navigation: {
         nextEl: "[data-swiper=next-video]",
         prevEl: "[data-swiper=prev-video]",
@@ -28,12 +32,23 @@ export const swiperConfigs = {
       pagination: {
         el: "[data-swiper=progress]",
         type: "progressbar",
+        renderCustom: (_, current, total) => `${current} / ${total}`,
       },
-      lazy: {
-        loadPrevNext: true, // Завантажує сусідні слайди
-        loadPrevNextAmount: 2, // Кількість сусідніх слайдів для завантаження
+      on: {
+        init: () => {
+          // console.log("Swiper ініціалізовано");
+        },
+        lazyImageLoad: (_, imageEl) => {
+          // console.log("Зображення завантажується:", imageEl);
+        },
+        lazyImageReady: (_, imageEl) => {
+          // console.log("Зображення готове:", imageEl);
+        },
+        slideChange: (swiper) => {
+          const totalSlides = swiper.slides.length;
+          // console.log(`Оновлено кількість слайдів: ${totalSlides}`);
+        },
       },
-      
     },
     pages: ["/"], // Сторінки, де дозволена ініціалізація
   },
@@ -77,5 +92,5 @@ export const swiperConfigs = {
       allowTouchMove: true,
     },
     pages: ["/"], // Сторінки, де дозволена ініціалізація
-  }, 
+  },
 };

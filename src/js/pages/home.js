@@ -17,60 +17,52 @@ export function initHomePage() {
   // Ініціалізація модального вікна для вакансій
   initRemodalVacancies();
 
-  // Swiper
-  
- initAllowedSwiper("company");
-//  initAllowedSwiper('video');
-// const updateAriaLabels = (swiper) => {
-//   const visibleSlides = swiper.slides.filter(slide => !slide.classList.contains('swiper-slide-hidden'));
-//   const totalVisibleSlides = visibleSlides.length;
+  initAllowedSwiper("company");
 
-//   visibleSlides.forEach((slide, index) => {
-//     const currentIndex = index + 1; // Починається з 1
-//     slide.setAttribute('aria-label', `${currentIndex} / ${totalVisibleSlides}`);
-//   });
-// };
-// console.log(document.readyState);
+  // VIDEO SWIPER LOGIC
+  // Знаходимо CMS List
+  const cmsList = document.querySelector('[fs-cmsfilter-element="list"]');
+  if (!cmsList) {
+    // console.error("CMS List не знайдено");
+    return;
+  }
 
-// if (document.readyState === "loading") {
-//   document.addEventListener("DOMContentLoaded", () => {
-//     console.log("DOMContentLoaded викликано");
-//     initAllowedSwiper('video');
-//   });
-// } else {
-//   console.log("DOMContentLoaded вже стався");
-//   initAllowedSwiper('video');
-// }
+  let swiperVideo = null;
+  let isUpdating = false;
 
-// document.addEventListener('DOMContentLoaded', () => {
-// const swiper = new Swiper('[data-swiper=video]', {
-//   lazy: {
-//     enabled: true,
-//     loadPrevNext: true,
-//   },
-//   speed: 500,
-//   spaceBetween: 16,
-//   slidesPerView: "auto",
-//   navigation: {
-//     nextEl: '[data-swiper=next-video]',
-//     prevEl: '[data-swiper=prev-video]',
-//   },
-//   pagination: {
-//     el: '[data-swiper=progress]',
-//     type: 'progressbar',
-//   },
-//   on: {
-//     init: (swiper) => {
-//       updateAriaLabels(swiper);
-//       console.log('Swiper ініціалізовано');
-//     },
-//     slideChange: (swiper) => {
-//       updateAriaLabels(swiper);
-//       console.log('Слайди оновлені');
-//     },
-//   },
-// });
-// });
+  // Функція перезапуску Swiper
+  function restartVideoSwiper() {
+    if (isUpdating) return;
+
+    isUpdating = true;
+    // console.log("Перезапуск Swiper...");
+
+    if (swiperVideo) {
+      swiperVideo.destroy(true, true); // Знищення старого Swiper
+      // console.log("Старий Swiper знищено");
+    }
+
+    swiperVideo = initAllowedSwiper("video"); // Ініціалізація нового Swiper
+    // console.log("Новий Swiper ініціалізовано");
+    isUpdating = false;
+  }
+
+  // Спостерігач за змінами у CMS List
+  const observer = new MutationObserver((mutations) => {
+    // Фільтруємо зміни, що стосуються лише дочірніх елементів
+    const cmsChanges = mutations.some((mutation) =>
+      Array.from(mutation.addedNodes).some(
+        (node) => node.nodeType === 1 && node.matches(".swiper-slide")
+      )
+    );
+
+    if (cmsChanges) {
+      restartVideoSwiper();
+    }
+  });
+
+  // Налаштовуємо спостерігач
+  observer.observe(cmsList, { childList: true, subtree: true });
 
   if (window.innerWidth >= 776) {
     // Ініціалізація Swiper для timeline бойового шляху
